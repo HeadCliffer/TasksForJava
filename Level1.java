@@ -1,17 +1,14 @@
-import java.math.BigInteger;
-
 public class Level1 {
-    public static int squirrel(int N) {
-        BigInteger factorial = BigInteger.ONE;
-        if( N < 0 ) return Integer.parseInt(null);
-        else if( N == 0) return 1;
-        else{
-            for( int i = 1; i<=N; i++ ) {
-                factorial = factorial.multiply(BigInteger.valueOf(i));
+
+    public static int odometr(int[] oksana){
+        int result = 0;
+        for( int i = 0; i<oksana.length; i++ ){
+            if(i % 2 == 1) continue;
+            if( oksana[i] < 0 ) return result;
+            else {
+                result += oksana[i];
             }
-            return Integer.parseInt( String.valueOf( factorial.toString().charAt(0) ));
         }
+        return result;
     }
 }
-
-
