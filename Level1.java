@@ -2,8 +2,8 @@ public class Level1 {
 
     /*public static void main(String[] args){
 
-        String s = "кук разбивается на набор строк через выравнивание по заданной ширине.";
-        WordSearch(12, s, "строк" );
+        String s = "строка разбивается на набор строк через выравнивание по заданной ширине.";
+        WordSearch(2, "1 2 3 4 5 6789", "678" );
 
     }*/
 
@@ -21,19 +21,20 @@ public class Level1 {
             if(ch[i] == ' '  && spaceLength >= len/2 ) {
                 i++;
                 sCopy += ln;
-                spaceLength = 0;
+                spaceLength = -1;
                 arrayCount++;
             }
 
             if(spaceLength == len) {
                 i--;
                 sCopy += ln;
-                spaceLength = 0;
+                spaceLength = -1;
                 arrayCount++;
             }
 
             else{
                 sCopy += ch[i];
+                //System.out.println(sCopy + " is sCopy");
             }
             spaceLength++;
         }
@@ -41,7 +42,8 @@ public class Level1 {
         /*System.out.println(sCopy);
         System.out.println(arrayCount);
         System.out.println(arrayNumbers);
-        System.out.println("**************");*/
+        System.out.println("**************");
+         */
 
         int[] numbers = new int[arrayCount];
         char[] chCopy = sCopy.toCharArray();
@@ -53,7 +55,7 @@ public class Level1 {
 
             if(chCopy[i] == '\n'){
                 i++;
-                //System.out.println(word);
+                System.out.println(word);
                 if(word.contentEquals(subs)){
                     numbers[count] = 1;
                     count++;
@@ -63,12 +65,22 @@ public class Level1 {
                     word = "";
                 }
             }
-            if(chCopy[i] == ' ' || i == chCopy.length - 1 ){
-                //System.out.println(word);
+            if(chCopy[i] == ' ' ){
+                i++;
+        //        System.out.println(word);
+                if(word.contentEquals(subs)) {      //Don't need count++ , because check  words on one String.
+                    numbers[count] = 1;
+                    word = "";
+                }else word = "";
+            }
+            if(i == chCopy.length - 1 ){        //Check end of String.length.
+                word += chCopy[i];
+          //      System.out.println(word);
                 if(word.contentEquals(subs)) {
                     numbers[count] = 1;
                     word = "";
                 }else word = "";
+
             }
             else word += chCopy[i];
         }
