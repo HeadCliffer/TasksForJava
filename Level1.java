@@ -2,81 +2,59 @@ public class Level1 {
 
     /*public static void main(String[] args){
 
-        String s = "кук разбивается на набор строк через выравнивание по заданной ширине.";
-        WordSearch(12, s, "строк" );
+        String s = "отдай мою кроличью лапку";
+        String text = TheRabbitsFoot(s, true );
+        System.out.println(text);
+        text = TheRabbitsFoot(s, false );
+        System.out.println(text);
 
     }*/
 
-    public static int [] WordSearch(int len, String s, String subs){
-        int spaceLength = 0;
-        int arrayCount = 1;
-        String arrayNumbers = "";
-        String sCopy = "";
-        String ln = "\n";
-        char[] ch = s.trim().toLowerCase().toCharArray();
+    private static String TheRabbitsFoot(String s, boolean encode){
+        String result = "";
+        int splitCount = 0;
+        //Delete space.
+        String split = s.replaceAll(" ", "");
+        //System.out.println(split);
 
-        // add \n
-        for(int i = 0; i<ch.length; i++) {
+        //Get squareRoot and round number.
+        double squareRoot = Math.round(Math.sqrt(split.length()));
+        //System.out.println(squareRoot);
 
-            if(ch[i] == ' '  && spaceLength >= len/2 ) {
-                i++;
-                sCopy += ln;
-                spaceLength = 0;
-                arrayCount++;
+        //Set to int and create matrix
+        char[][] matrix = new char[(int)squareRoot][(int)squareRoot];
+        //System.out.println(matrix.length);
+
+        //Init matrix
+        for (int i = 0; i < squareRoot; i++) {
+            for (int j = 0; j < squareRoot; j++) {
+                if(splitCount == split.length()) break;
+                matrix[i][j] = split.charAt( splitCount );
+                splitCount++;
             }
-
-            if(spaceLength == len) {
-                i--;
-                sCopy += ln;
-                spaceLength = 0;
-                arrayCount++;
-            }
-
-            else{
-                sCopy += ch[i];
-            }
-            spaceLength++;
         }
+        if(encode) {
+            //Encryption and Decryption String
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix.length; j++) {
 
-        /*System.out.println(sCopy);
-        System.out.println(arrayCount);
-        System.out.println(arrayNumbers);
-        System.out.println("**************");*/
+                    result += matrix[j][i];
 
-        int[] numbers = new int[arrayCount];
-        char[] chCopy = sCopy.toCharArray();
-        String word = "";
-        int count = 0;
+                }
+                result += " ";
+            }
+        }else{
+            //Decryption String
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix.length ; j++) {
 
-        //Check subs word
-        for (int i = 0; i < chCopy.length; i++) {
+                    result += matrix[i][j];
 
-            if(chCopy[i] == '\n'){
-                i++;
-                //System.out.println(word);
-                if(word.contentEquals(subs)){
-                    numbers[count] = 1;
-                    count++;
-                    word = "";
-                }else{
-                    count++;
-                    word = "";
                 }
             }
-            if(chCopy[i] == ' ' || i == chCopy.length - 1 ){
-                //System.out.println(word);
-                if(word.contentEquals(subs)) {
-                    numbers[count] = 1;
-                    word = "";
-                }else word = "";
-            }
-            else word += chCopy[i];
         }
 
-        /*for (int i = 0; i <numbers.length; i++) {
-            System.out.print(numbers[i] + " ");
-        }*/
 
-        return numbers;
+        return result;
     }
 }
