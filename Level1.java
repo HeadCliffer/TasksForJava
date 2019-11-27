@@ -2,81 +2,32 @@ public class Level1 {
 
     /*public static void main(String[] args){
 
-        String s = "кук разбивается на набор строк через выравнивание по заданной ширине.";
-        WordSearch(12, s, "строк" );
+        int[] data = {0,1,0,0,0};
+        System.out.println(SumOfThe(5, data) + " Programm end");
 
     }*/
 
-    public static int [] WordSearch(int len, String s, String subs){
-        int spaceLength = 0;
-        int arrayCount = 1;
-        String arrayNumbers = "";
-        String sCopy = "";
-        String ln = "\n";
-        char[] ch = s.trim().toLowerCase().toCharArray();
+    public static int SumOfThe(int N, int [] data){
+        int sum = 0;
+        int result = 0;
+        int sumCopy;
 
-        // add \n
-        for(int i = 0; i<ch.length; i++) {
-
-            if(ch[i] == ' '  && spaceLength >= len/2 ) {
-                i++;
-                sCopy += ln;
-                spaceLength = 0;
-                arrayCount++;
-            }
-
-            if(spaceLength == len) {
-                i--;
-                sCopy += ln;
-                spaceLength = 0;
-                arrayCount++;
-            }
-
-            else{
-                sCopy += ch[i];
-            }
-            spaceLength++;
+        if(N<=0) return data[0];
+        // Add all numbers
+        for(int i = 0;i<N; i++){
+            sum += data[i];
+            //System.out.print( sum + " ");
         }
 
-        /*System.out.println(sCopy);
-        System.out.println(arrayCount);
-        System.out.println(arrayNumbers);
-        System.out.println("**************");*/
-
-        int[] numbers = new int[arrayCount];
-        char[] chCopy = sCopy.toCharArray();
-        String word = "";
-        int count = 0;
-
-        //Check subs word
-        for (int i = 0; i < chCopy.length; i++) {
-
-            if(chCopy[i] == '\n'){
-                i++;
-                //System.out.println(word);
-                if(word.contentEquals(subs)){
-                    numbers[count] = 1;
-                    count++;
-                    word = "";
-                }else{
-                    count++;
-                    word = "";
-                }
+        //Finding right number...
+        for(int i = 0; i<N; i++){
+            for(int j = 0; j<N; j++){
+                sumCopy = sum;
+                if( sumCopy - data[i] == data[j]) result = data[j];
+                //System.out.println(result);
             }
-            if(chCopy[i] == ' ' || i == chCopy.length - 1 ){
-                //System.out.println(word);
-                if(word.contentEquals(subs)) {
-                    numbers[count] = 1;
-                    word = "";
-                }else word = "";
-            }
-            else word += chCopy[i];
         }
-
-        /*for (int i = 0; i <numbers.length; i++) {
-            System.out.print(numbers[i] + " ");
-        }*/
-
-        return numbers;
+        return result;
     }
+
 }
