@@ -6,7 +6,7 @@ public class Level1 {
     public static int countUndo = 0;
     public static boolean isUndo = false;
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
 
         /*System.out.println(BastShoe("1 Привет"));
         System.out.println(BastShoe("1 , Мир!"));
@@ -36,14 +36,14 @@ public class Level1 {
         System.out.println(BastShoe("4"));
         System.out.println(BastShoe("5"));
         System.out.println(BastShoe("5"));
-        System.out.println(BastShoe("5"));*/
+        System.out.println(BastShoe("5"));
 
         System.out.println("****************************************");
         for(String s : steps) System.out.println(s);
 
         //System.out.println(BastShoe(""));
 
-    }
+    }*/
 
     public static String BastShoe(String command){
         String text;
